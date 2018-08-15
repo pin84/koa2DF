@@ -1,0 +1,177 @@
+.toTop {
+  position: fixed;
+  right: 3rem;
+  bottom: 5rem;
+  z-index: 1;
+  opacity: 0;
+  transition: 1s linear;
+}
+.toTop:hover {
+  cursor: pointer;
+}
+.toTop .icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+.foot-top {
+  width: 100%;
+  border-bottom: 1px solid #e5e4e2;
+  border-top: 1px solid #e5e4e2;
+  margin: 2rem 0;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.foot-top .foot-top-content {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  padding: 3rem 0;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.foot-top .foot-top-content .follow {
+  display: flex;
+}
+.foot-top .foot-top-content .follow ul {
+  display: flex;
+}
+.foot-top .foot-top-content .follow ul li {
+  margin-left: 2rem;
+}
+.foot-top .foot-top-content .follow ul li:hover {
+  cursor: pointer;
+}
+.foot-top .foot-top-content .follow ul li .weixin,
+.foot-top .foot-top-content .follow ul li .weibo,
+.foot-top .foot-top-content .follow ul li .qq,
+.foot-top .foot-top-content .follow ul li .mail {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+.foot-top .foot-top-content .follow span {
+  word-break: normal;
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  margin-right: 2rem;
+}
+.foot-top .foot-top-content .search {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  font-size: 0;
+}
+.foot-top .foot-top-content .search .input,
+.foot-top .foot-top-content .search .submit {
+  outline: none;
+  font-size: 1.6rem;
+  border: 1px solid #e5e4e2;
+}
+.foot-top .foot-top-content .search .input {
+  padding: 1rem;
+  width: 70%;
+  border-right: none;
+}
+.foot-top .foot-top-content .search .submit {
+  background: #0f0f0f;
+  color: #fff;
+  padding: 1.1rem 1.5rem;
+}
+.foot-top .foot-top-content .search .submit:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.content {
+  width: 80%;
+  margin: 3rem auto;
+  border-bottom: 1px solid #666;
+  display: flex;
+}
+.content .hot {
+  background: #fff;
+}
+.content .hot .hot-img {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+.content .hot .hot-img a {
+  position: relative;
+  display: inline-block;
+  width: 140px;
+  height: 100px;
+  margin-right: 1rem;
+}
+.content .hot .hot-img a img {
+  width: 100%;
+  height: 100%;
+}
+.content .hot .hot-img a span {
+  display: inline-block;
+  width: 100%;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  background: #ad2e23;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 0 0.5rem;
+}
+.content .hot .hot-img a span:hover {
+  text-decoration: underline;
+}
+.content .hot .list {
+  padding: 1rem 0;
+}
+.content .hot .list ul {
+  padding: 0 1.4rem;
+  color: #ad2e23;
+}
+.content .hot .list ul li {
+  list-style: square;
+}
+.content .hot .list ul li a {
+  box-sizing: border-box;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  color: #000;
+  font-size: 1.4rem;
+}
+.content .hot .list ul li a:hover {
+  text-decoration: underline;
+}
+.content .group {
+  width: 50%;
+  margin-left: 3rem;
+}
+.content .group ul.list {
+  padding: 1rem 3rem 0 0;
+  color: #ad2e23;
+}
+.content .group ul.list li {
+  display: flex;
+  justify-content: space-between;
+}
+.content .group ul.list li a {
+  font-size: 1.4rem;
+  color: #000;
+  height: 1.8rem;
+  line-height: 1.8rem;
+}
+.content .group ul.list li a:hover {
+  text-decoration: underline;
+}
+.content .group ul.list li span {
+  color: #666;
+}
+.title {
+  border-bottom: 1px solid #ad2e23;
+  padding: 0.5rem 0;
+}
+.title a {
+  font-size: 1.6rem;
+  color: #ad2e23;
+  font-weight: 600;
+}

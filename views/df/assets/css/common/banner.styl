@@ -1,0 +1,49 @@
+.swiper-container
+  width: 100%;
+  height: 100%;
+  .swiper-wrapper
+    transition-duration:  2s
+    .swiper-slide 
+      text-align: center;
+      background: #fff;
+      a
+        display block
+        img
+          display block
+          width 100%
+
+.show
+  width 80%
+  .swiper-wrapper
+    display flex
+    justify-content space-between
+    .swiper-slide
+      position relative
+      width 33%
+      transition .5s
+      &:hover
+        opacity .9
+      img
+        width 100%
+      span 
+        box-sizing border-box
+        width 100%
+        background #336699
+        position absolute
+        left 0
+        bottom 0 
+        padding .5rem
+        color #fff
+        font-size 1.4rem
+  .next, .prev
+    width 25px
+    height 42px
+    background-color rgba(0,0,0,0.5)
+    &.next
+      background-image url("../images/icon/right.png")
+      &:hover
+        background-image url("../images/icon/right-1.png")
+    &.prev
+      background-image url("../images/icon/left.png")
+      &:hover
+        background-image url("../images/icon/left-1.png")

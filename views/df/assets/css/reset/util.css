@@ -1,0 +1,83 @@
+html {
+  font-size:62.5%;
+  color: #222;
+  font-family: 'Microsoft Yahei';
+  min-width: 75rem;
+}
+/* body {
+  font-size:62.5%;
+} */
+::selection {
+  background-color: #b3d4fc;
+  text-shadow: none;
+}
+
+body,ul,p,h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+a{
+  text-decoration: none
+}
+/*把img变成块元素，使img和文字连接时不会出来空白*/
+img{
+  display: block;
+}
+
+/*============
+  工具样式
+=============*/
+.conter-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.browserupgrade {
+  margin: 0;
+  padding: 1rem;
+  background: #ccc;
+}
+

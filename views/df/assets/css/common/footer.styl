@@ -1,0 +1,97 @@
+footer 
+  width 100%
+  background #23282f
+  color #fff
+  padding-top 3rem
+  margin-top 5rem
+  .footer
+    width 80%
+    margin 0 auto
+    display flex
+    margin-bottom 2rem
+    justify-content space-between
+    .company
+      display flex
+      flex-direction column
+      text-align center
+      flex-basis 20rem
+      margin-right 3rem
+      .culture
+        margin-bottom 1rem
+        .culture-logo
+          margin 0 auto
+          width 4.8rem
+          height 4.8rem
+          img
+            border-radius 50%
+            width 100%
+        p
+          margin 1rem 0
+      ul.social
+        display flex
+        justify-content center
+        li
+          position relative
+          border 1px solid #5a5956
+          padding .5rem
+          margin-right 1rem
+          &:not(.li-weixin):hover
+            background #016579
+            cursor pointer
+          &.li-weixin:hover
+            background #016579
+            .weixin-layer
+              opacity 1
+              transform scale(1,1)
+              transform-origin -50% 150%
+            
+          .weixin, .weibo, .qq, .mail
+            width 2rem
+            height 2rem
+          .weixin-layer
+            position absolute
+            // display block
+            width 8rem
+            height 8rem 
+            top -8rem
+            right -8rem
+            transform scale(0,0)
+            // background url(../images/social/QR1.png) no-repeat center
+            z-index 1
+            // opacity 0
+            transition .5s 
+            img
+              width 100%
+    .works, .aboutUs, .contact, .recruit, .news
+      margin-left 3rem
+      h1
+        margin-bottom 1rem
+        letter-spacing 1rem
+        font-size 1.8rem
+      ul
+        li
+          padding .3rem 0  
+          transition .5s 
+          &:before
+            content '>'
+            margin-right 2rem
+          &:hover
+            a  
+              transform:translateX(-10px)
+              color #9d426b
+          a
+            position absolute
+            transition .5s
+            color #fff
+  .footer-bottom
+    width 100%
+    height 4rem
+    text-align center
+    line-height 4rem
+    color #8b8b8b
+    background #272c33;  
+    a
+      color #8b8b8b
+      &:hover
+        text-decoration underline
+             

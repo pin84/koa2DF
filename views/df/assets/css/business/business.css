@@ -1,0 +1,234 @@
+body {
+  background: #fff;
+}
+.main {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+}
+.main .server-range {
+  flex-basis: 17rem;
+}
+.main .server-range .title {
+  padding: 4rem 0 1.5rem 1rem;
+  display: flex;
+  background: #dedede;
+}
+.main .server-range .title .title-left {
+  font-size: 7rem;
+  margin-top: -13px;
+}
+.main .server-range .title .title-right {
+  margin-left: 5px;
+}
+.main .server-range .title .title-right h2 {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+}
+.main .server-range .title .title-right span {
+  font-size: 2rem;
+}
+.main .server-range .list {
+  font-size: 1.4rem;
+  color: #565656;
+}
+.main .server-range .list li {
+  border-top: 1px solid #fff;
+  display: inline-block;
+  width: 204px;
+  height: 36px;
+  line-height: 36px;
+  position: relative;
+}
+.main .server-range .list li .icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-bottom: -6px;
+  margin-left: -4.5px;
+}
+.main .server-range .list li a {
+  display: block;
+  height: 100%;
+  padding: 0 25px 0 52px;
+  color: #565656;
+  position: relative;
+  background: #e5e4e3;
+}
+.main .server-range .list li a.active {
+  width: 144px;
+  height: 48px;
+  background: url("../../images/business/on.gif");
+  color: #fff;
+}
+.main .server-range .list li a:hover {
+  width: 144px;
+  height: 48px;
+  background: url("../../images/business/on.gif");
+  color: #fff;
+}
+.main .content {
+  margin-left: 3rem;
+  margin-top: 3rem;
+  width: 100%;
+}
+.main .content-title {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #888;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 2rem 0 0;
+}
+.main .content-title h1 {
+  color: #ac2d23;
+  font-size: 2.5rem;
+  font-weight: 400;
+  height: 45px;
+  line-height: 45px;
+}
+.main .content-title ul {
+  display: flex;
+  position: absolute;
+  right: 2rem;
+  bottom: -8px;
+}
+.main .content-title ul li:after {
+  content: '>';
+}
+.main .content-title ul li a {
+  color: #000;
+  font-size: 1.4rem;
+  line-height: 45px;
+}
+.main .content-title ul li a:hover {
+  color: #ac3c58;
+  text-decoration: underline;
+}
+.main .book-list {
+  width: 100%;
+  position: relative;
+}
+.main .book-list ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main .book-list ul li {
+  position: relative;
+  width: 160px;
+  height: 250px;
+  margin: 0.2rem;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #fff;
+}
+.main .book-list ul li:hover .favor {
+  opacity: 1;
+}
+.main .book-list ul li .imgbox {
+  width: 100%;
+  height: 200px;
+}
+.main .book-list ul li .imgbox img {
+  width: 100%;
+  height: 100%;
+}
+.main .book-list ul li .detail {
+  background: #fff;
+}
+.main .book-list ul li .detail h3,
+.main .book-list ul li .detail .auth,
+.main .book-list ul li .detail .price {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.main .book-list .favor {
+  position: absolute;
+  width: 160px;
+  height: 40px;
+  left: 0;
+  bottom: 50px;
+  background: #06c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+.main .book-list .favor span {
+  color: #fff;
+  padding: 12px 35px;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+.main .book-list .favor span:hover {
+  cursor: pointer;
+  font-size: 14px;
+}
+.main .btn-fun {
+  display: flex;
+  justify-content: space-between;
+}
+.main .btn-fun input {
+  font-size: 14px;
+  outline: none;
+  padding: 5px 10px;
+  margin: 10px 0;
+}
+.main .btn-fun input.submit:hover,
+.main .btn-fun input.cancle:hover,
+.main .btn-fun input.btnSearch:hover {
+  cursor: pointer;
+}
+.main .pagination {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  height: 39px;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.main .pagination ul {
+  display: flex;
+  justify-content: center;
+}
+.main .pagination ul li {
+  border-right: 1px solid #e0e0e0;
+}
+.main .pagination ul li:last-child {
+  border-right: none;
+}
+.main .pagination ul li.current a {
+  background: #cff;
+}
+.main .pagination ul li a {
+  display: block;
+  padding: 0 1.3rem;
+  font-size: 1.4rem;
+  color: #111;
+  height: 39px;
+  line-height: 39px;
+}
+.main .pagination ul li a:hover {
+  background: #9cc;
+}
+.main .pagination #select {
+  display: inline-block;
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  margin-left: 20px;
+  outline: none;
+}
+.main .pagination #select .option {
+  height: 10px;
+  overflow-y: hidden;
+}
+.main .pagination #select .option :hover {
+  background-color: #1e90ff;
+  color: #fff;
+}

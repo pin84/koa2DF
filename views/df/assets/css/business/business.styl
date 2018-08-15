@@ -1,0 +1,191 @@
+body
+  background #fff
+.main
+  width 80%
+  margin 0 auto
+  display flex
+  .server-range
+    flex-basis 17rem
+    .title
+      padding 4rem 0 1.5rem 1rem
+      display flex
+      background #dedede
+      .title-left
+        font-size 7rem
+        margin-top -13px
+      .title-right
+        margin-left 5px
+        h2
+          font-size 2.5rem
+          letter-spacing 5px
+        span
+          font-size 2rem  
+    .list
+      font-size 1.4rem
+      color #565656
+      li
+        border-top 1px solid #fff
+        display inline-block
+        width 204px
+        height 36px
+        line-height 36px
+        position relative
+        .icon
+          display inline-block
+          width 18px
+          height 18px
+          margin-bottom -6px
+          margin-left -4.5px
+        a
+          display block
+          // width 130px
+          height 100%
+          padding 0 25px 0 52px
+          color #565656
+          position relative
+          background #e5e4e3
+          &.active
+            width 144px
+            height 48px
+            background url(../../images/business/on.gif)
+            color #fff
+          &:hover
+            width 144px
+            height 48px
+            background url(../../images/business/on.gif)
+            color #fff
+  .content
+     margin-left 3rem
+     margin-top 3rem
+     width 100%
+    .content-title
+      position relative
+      width 100%
+      border-bottom 1px solid #888
+      display flex
+      justify-content space-between
+      box-sizing border-box
+      padding 0 2rem 0 0
+      h1
+        color #ac2d23
+        font-size 2.5rem
+        font-weight 400
+        height 45px
+        line-height 45px
+      ul
+        display flex
+        position absolute
+        right 2rem
+        bottom -8px
+        li
+          &:after
+            content '>'
+          a
+            color black
+            font-size 1.4rem
+            line-height 45px
+            &:hover
+              color #ac3c58
+              text-decoration underline
+    .book-list
+      width 100%
+      position relative
+      ul
+        display flex
+        flex-wrap wrap
+        li
+          position relative
+          width 160px
+          height 250px
+          margin 0.2rem
+          margin-bottom 10px
+          display flex
+          flex-direction column
+          border 1px solid #fff
+          &:hover
+            .favor
+              opacity 1
+          .imgbox
+            width 100%
+            height 200px
+            img
+              width 100%
+              height 100%
+          .detail
+            background #ffffff
+            h3,.auth,.price
+              font-size 14px
+              white-space nowrap
+              overflow hidden
+              text-overflow ellipsis
+      .favor
+        position absolute
+        width 160px
+        height 40px 
+        left 0
+        bottom 50px
+        background #0066CC
+        display flex
+        justify-content center  
+        align-items center
+        opacity 0
+        span
+          color #fff
+          padding 12px 35px
+          letter-spacing 2px
+          font-size 12px
+          &:hover
+            cursor pointer
+            font-size 14px
+    .btn-fun
+      display flex
+      justify-content space-between
+      input 
+        font-size 14px
+        outline none 
+        padding 5px 10px
+        margin 10px 0
+        &.submit:hover,&.cancle:hover,&.btnSearch:hover
+          cursor pointer
+
+    .pagination
+      border-top 1px solid #e0e0e0;
+      border-bottom 1px solid #e0e0e0;
+      height 39px
+      margin-top 1rem
+      display flex
+      justify-content center
+      ul
+        display flex
+        justify-content center
+        li
+          border-right 1px solid #e0e0e0;
+          &:last-child
+            border-right none
+          &.current
+            a
+              background #CCFFFF
+          a
+            display block
+            padding 0 1.3rem
+            font-size 1.4rem
+            color #111
+            height 39px
+            line-height 39px
+            &:hover
+              background #99CCCC
+
+      #select
+        display inline-block
+        width 50px
+        height 40px
+        line-height 40px
+        font-size 14px
+        margin-left 20px
+        outline none
+        .option
+          height 10px
+          overflow-y:hidden
+          :hover
+             background-color:#1E90FF;
+             color:#fff;
