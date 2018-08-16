@@ -74,6 +74,16 @@ class Db {
     return this.connect(sql)
   }
 
+  findBannerFromID(id){
+    let sql = `select * from banner_table where id='${id}'`
+    return this.connect(sql)
+  }
+
+  updataBanner(id,title,href,description){
+    let sql = `update banner_table set title='${title}',href='${href}',description='${description}' where ID='${id}'`
+    this.connect(sql)
+  }
+
   insertBanner(title,description,href){
     let sql = `insert into banner_table (title,description,href) values ('${title}','${description}','${href}')`
     return this.connect(sql)
@@ -83,7 +93,7 @@ class Db {
     let sql = `delete from banner_table where id='${id}'`
     this.connect(sql)
   }
-  
+
 
   updata() {
 

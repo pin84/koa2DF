@@ -2,16 +2,18 @@ const router = require('koa-router')()
 let myDB = require('../../../mysql/mysql')
 
 router.get('/', async (ctx) => {
+  let banners = await myDB.getBanners()
   switch (ctx.query.act) {
     case 'mod':
-      console.log('mod')
+      let findBanner = await myDB.findBannerFromID(ctx.query.id)
+      await ctx.render('admin/dfbak/banner', { banners, mod_data: findBanner })
       break
     case 'del':
       await myDB.deleteBanner(ctx.query.id)
       await ctx.redirect('banner')
       break
     default:
-      let banners = await myDB.getBanners()
+      // let banners = await myDB.getBanners()
       await ctx.render('admin/dfbak/banner', { banners })
       break
   }
@@ -27,6 +29,15 @@ router.post('/', async (ctx) => {
     return
   }
 
+  if (ctx.request.body.mod_id) {
+    let id = ctx.request.body.mod_id,
+      title = ctx.request.body.title,
+      href = ctx.request.body.href,
+      description = ctx.request.body.description
+    await myDB.updataBanner(id, title, href, description)
+    await ctx.redirect('banner')
+    return
+  }
 
   await myDB.insertBanner(title, description, href)
   await ctx.redirect('banner')
