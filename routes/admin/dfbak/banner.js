@@ -7,11 +7,8 @@ router.get('/', async (ctx) => {
       console.log('mod')
       break
     case 'del':
-      
-      console.log('del')
-
-      await myDB.deledtBanner(id)
-
+      await myDB.deleteBanner(ctx.query.id)
+      await ctx.redirect('banner')
       break
     default:
       let banners = await myDB.getBanners()
@@ -29,8 +26,6 @@ router.post('/', async (ctx) => {
     ctx.body = '请输入完整的信息'
     return
   }
-
-
 
 
   await myDB.insertBanner(title, description, href)
