@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>msg</title>
+</head>
+
+<body>
+  <% include components/top.inc.ejs %>
+    
+    <div class="msgBox">
+      <table border='1' style='width:95%;border-collapse:collapse;'>
+        <thead>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>联系方式</th>
+          <th>时间</th>
+          <th>要了解的书</th>
+        </thead>
+        <tbody>
+          <% for(let i = 0,len = data.length; i<len;i++){ %>
+              <tr>
+                <td><%= data[i].id %></td>
+                <td><%= data[i].name %></td>
+                <td><%= data[i].phone %></td>
+                <td><%= (data[i].create_time).toLocaleDateString() %></td>
+                <!-- <td><%= (data[i].create_time).toLocaleTimeString() %></td> -->
+                <td><%= data[i].bookinfo %></td>
+              </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+</body>
+
+</html>

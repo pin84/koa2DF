@@ -49,7 +49,42 @@ class Db {
     })
   }
 
+  getPageNum() {
+    let sql = `select count(ID) as count from custom_evaluation_table`
+    return this.connect(sql)
+  }
+
+  getBooks(start,end){
+    let sql = `select * from custom_evaluation_table limit ${start}, ${end}`
+    return this.connect(sql)
+  }
+
+  searchBooks(keyword){
+    let sql = `select * from custom_evaluation_table where title like '%${keyword}%' or auth like '%${keyword}%' or printer like '%${keyword}%'`
+    return this.connect(sql)
+  }
+
+  favor(name,phone,books){
+    let sql = `insert into favor (name,phone,bookinfo) values ('${name}','${phone}','${books}')`
+    return this.connect(sql)
+  }
+
+  getBanners(){
+    let sql = `select * from banner_table `
+    return this.connect(sql)
+  }
+
+  insertBanner(title,description,href){
+    let sql = `insert into banner_table (title,description,href) values ('${title}','${description}','${href}')`
+    return this.connect(sql)
+  }
+
+  deleteBanner(id){
+    let sql = `delete from banner_table where id='${id}'`
+    this.connect(sql)
+  }
   
+
   updata() {
 
   }

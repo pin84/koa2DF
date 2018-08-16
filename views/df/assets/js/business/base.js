@@ -6,7 +6,7 @@ let startPage = 1
 let pageOfItem = 3
 
 initPageNum('/getPageNum')
-getData(startPage, pageOfItem, '/get_books')
+getData(startPage, pageOfItem, '/getBooks')
 searchBook()
 submitInfo()
 
@@ -68,14 +68,14 @@ function submitInfo() {
     let noteListLi = document.querySelectorAll('#books .item')
 
     console.log(inputPhone.value.length > 5);
-   
+
 
     if (!inputName.value || !inputPhone.value) {
       alert('请输入姓名及联系方式')
       return
     }
-    
-    if(inputPhone.value.length < 9){
+
+    if (inputPhone.value.length < 9) {
       alert('请输入正确的联系方式')
       return
     }
@@ -137,7 +137,7 @@ function searchBook() {
         let searchBooks = JSON.parse(data)
         booksCon.innerHTML = ''
         pageUl.innerHTML = ''
-        searchBooks.length > pageOfItem ?  searchBooks.length = pageOfItem : searchBooks
+        searchBooks.length > pageOfItem ? searchBooks.length = pageOfItem : searchBooks
         let inHtml = generateBookList(searchBooks)
 
         // let pageCount = Math.ceil(searchBooks[0].isum / pageOfItem)
@@ -165,6 +165,9 @@ function initPageNum(url) {
       let liFragment = generatePage(pageCount)
       pageUl.appendChild(liFragment)
       pageClick(pageUl)
+    },
+    error: function (err) {
+      console.log(err)
     }
   })
 }
@@ -193,7 +196,7 @@ function pageClick(elem) {
     e.target.parentNode.className = 'current'
     siblingsRemoveClass(e.target.parentNode)
     //获取相应的数据
-    getData(e.target.innerText, pageOfItem, '/get_books')
+    getData(e.target.innerText, pageOfItem, '/getBooks')
   })
 }
 

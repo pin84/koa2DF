@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="data:image/ico;base64,aWNv">
+	<title>admin-banner</title>
+	<style type="text/css">
+		body{
+			margin-bottom:50px;
+		}
+		.cover{
+			position:fixed;
+			width:100%;
+			height:100;
+			background:#000;
+			opacity:.3;
+			left:0;
+			top:0;
+			right:0;
+			bottom:0;
+		}
+		.updateBox{
+			box-sizing:border-box;
+			padding:10px;
+			width:300px;
+			height:200px;
+			border:1px solid #eee;
+			background:#fff;
+			position:fixed;
+			left:50%;
+			top:50%;
+			margin-top:-100px;
+			margin-left:-150px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<% include components/top.inc.ejs %>
+
+		
+		<div>
+			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
+				书名: <input type="text" name="title"><br>
+				作者: <textarea name="description"></textarea><br>
+				封面: <input type="file" name="fl"><br>
+				<input type="submit" value="submit">
+			</form>
+		</div>
+
+		<table border='1' style='width:95%;border-collapse:collapse;'>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>书名</th>
+					<th>作者</th>
+					<th>封面</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(let i = 0;i < customData.length; i++){ %>
+				<tr>
+					<td><%= customData[i].ID %></td>
+					<td><%= customData[i].title %></td>
+					<td><%= customData[i].auth %></td>
+					<td style='word-break:break-all;'><img width='40' src="/upload/<%= customData[i].src %>"></td>
+					<td style='word-break:keep-all;'>
+						<a href="?act=mod&id=<%= customData[i].ID %>">修改</a>
+						<a href="?act=del&id=<%= customData[i].ID %>" onclick='return confirm("确认删除吗")' >删除</a>
+					</td>
+				</tr>
+				<% } %>
+			</tbody> 
+		</table> 
+
+
+		<% if(typeof mod_data !== 'undefined'){ %>
+		<div class="cover"></div>
+		<div class='updateBox'>
+			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
+				<input type="hidden" name="mod_id" value='<%= mod_data.ID %>'>
+				书名: <input type="text" name="title" value="<%= mod_data.title %>"><br>
+				作者: <textarea name="description"><%= mod_data.auth %></textarea><br>
+				封面: <input type="file" name="fl" ><br>
+				<input type="submit" value="modify">
+				<a href="/admin/custom" style='font-size:18px;'>cancle</a>
+			</form>
+		</div>
+		<% } %>
+	</div>
+</body>
+</html>
