@@ -38,8 +38,8 @@
 </head>
 <body>
 	<div>
-		<% include components/top.inc.ejs %>
 
+		{{include './components/top.html'}}
 		
 		<div>
 			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
@@ -61,35 +61,36 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% for(let i = 0;i < customData.length; i++){ %>
+					{{each books}}
 				<tr>
-					<td><%= customData[i].ID %></td>
-					<td><%= customData[i].title %></td>
-					<td><%= customData[i].auth %></td>
-					<td style='word-break:break-all;'><img width='40' src="/upload/<%= customData[i].src %>"></td>
+					<td>{{books[$index].ID}}</td>
+					<td>{{books[$index].title}}</td>
+					<td>{{books[$index].auth}}</td>
+					<td style='word-break:break-all;'><img width='40' src="/upload/{{books[$index].src}}"></td>
 					<td style='word-break:keep-all;'>
-						<a href="?act=mod&id=<%= customData[i].ID %>">修改</a>
-						<a href="?act=del&id=<%= customData[i].ID %>" onclick='return confirm("确认删除吗")' >删除</a>
+						<a href="?act=mod&id={{books[$index].ID}}">修改</a>
+						<a href="?act=del&id={{books[$index].ID}}" onclick='return confirm("确认删除吗")' >删除</a>
 					</td>
 				</tr>
-				<% } %>
+				{{/each}}
 			</tbody> 
 		</table> 
 
 
-		<% if(typeof mod_data !== 'undefined'){ %>
-		<div class="cover"></div>
-		<div class='updateBox'>
-			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
-				<input type="hidden" name="mod_id" value='<%= mod_data.ID %>'>
-				书名: <input type="text" name="title" value="<%= mod_data.title %>"><br>
-				作者: <textarea name="description"><%= mod_data.auth %></textarea><br>
-				封面: <input type="file" name="fl" ><br>
-				<input type="submit" value="modify">
-				<a href="/admin/custom" style='font-size:18px;'>cancle</a>
-			</form>
-		</div>
-		<% } %>
+			{{if (typeof mod_data !== 'undefined')}}
+			<div class="cover"></div>
+			<div class='updateBox'>
+				<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
+					<input type="hidden" name="mod_id" value='<%= mod_data.ID %>'>
+					书名: <input type="text" name="title" value="<%= mod_data.title %>"><br>
+					作者: <textarea name="description"><%= mod_data.auth %></textarea><br>
+					封面: <input type="file" name="fl" ><br>
+					<input type="submit" value="modify">
+					<a href="/admin/custom" style='font-size:18px;'>cancle</a>
+				</form>
+			</div>
+		{{/if}}
+		
 	</div>
 </body>
 </html>

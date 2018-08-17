@@ -94,6 +94,17 @@ class Db {
     this.connect(sql)
   }
 
+  //msg
+  findMsg(){
+    let sql = `select * from favor`
+    return this.connect(sql)
+  }
+
+  //upNewBook
+  findBooks(){
+    let sql = `select * from books_table`
+    return this.connect(sql)
+  }
 
   updata() {
 

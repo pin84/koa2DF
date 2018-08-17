@@ -9,8 +9,8 @@
 </head>
 
 <body>
-  <% include components/top.inc.ejs %>
-    
+  <h1>msg</h1>
+    {{include './components/top.html'}}
     <div class="msgBox">
       <table border='1' style='width:95%;border-collapse:collapse;'>
         <thead>
@@ -21,16 +21,15 @@
           <th>要了解的书</th>
         </thead>
         <tbody>
-          <% for(let i = 0,len = data.length; i<len;i++){ %>
+          {{each data}}
               <tr>
-                <td><%= data[i].id %></td>
-                <td><%= data[i].name %></td>
-                <td><%= data[i].phone %></td>
-                <td><%= (data[i].create_time).toLocaleDateString() %></td>
-                <!-- <td><%= (data[i].create_time).toLocaleTimeString() %></td> -->
-                <td><%= data[i].bookinfo %></td>
+                <td>{{data[$index].id}}</td>
+                <td>{{data[$index].name}}</td>
+                <td>{{data[$index].phone}}</td>
+                <td>{{data[$index].create_time.toLocaleString()}}</td>
+                <td>{{data[$index].bookinfo}}</td>
               </tr>
-          <% } %>
+         {{/each}}
         </tbody>
       </table>
     </div>

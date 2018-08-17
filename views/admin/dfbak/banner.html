@@ -41,8 +41,9 @@
 </head>
 
 <body>
+  <h1>banner</h1>
   <div>
-    {{include './components/top.html'}}
+      {{include './components/top.html'}}
     <div>
       <form action="?" method="post" autocomplete='off'>
         title:
@@ -82,7 +83,6 @@
         {{/each}}
       </tbody>
     </table>
-    {{mod_data}}
     {{if typeof mod_data !== 'undefined'}}
     <div class="cover"></div>
     <div class='updateBox'>

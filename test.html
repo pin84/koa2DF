@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
 
   <h1>test</h1>
 
   <script>
-    
-    for(let i = 0; i < 10; i++){
-      
-      let a = Math.random().toString(36).substr(2)
 
-      console.log('DF'+a.substr(0,5));
-      
+    let time = new Date()
+    option = {
+      year: 'numeric', month: '2-digit', day: 'numeric',
+      hour: 'numeric', minute: 'numeric', second: 'numeric',
+      hour12: false, // 使用24小时制
+      timeZone: 'America/Los_Angeles'
     }
+    console.log(new Intl.DateTimeFormat('zh-Hans-CN',option).format(time))
 
   </script>
 </body>
+
 </html>

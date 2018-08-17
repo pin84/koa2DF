@@ -1,5 +1,7 @@
 const router = require('koa-router')()
 const banner = require('./banner')
+const msg = require('./msg')
+const upNewBook = require('./upNewBook')
 
 router.get('/', async (ctx) => {
   await ctx.render('admin/dfbak/index')
@@ -20,6 +22,8 @@ router.get('/custom', async (ctx) => {
 
 //配置admin的子路由
 router.use('/banner',banner.routes())
+router.use('/msg',msg.routes())
+router.use('/upNewBook',upNewBook.routes())
 
 
 
