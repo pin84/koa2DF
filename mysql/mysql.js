@@ -50,17 +50,17 @@ class Db {
   }
 
   getPageNum() {
-    let sql = `select count(ID) as count from custom_evaluation_table`
+    let sql = `select count(ID) as count from books_table`
     return this.connect(sql)
   }
 
   getBooks(start,end){
-    let sql = `select * from custom_evaluation_table limit ${start}, ${end}`
+    let sql = `select * from books_table limit ${start}, ${end}`
     return this.connect(sql)
   }
 
   searchBooks(keyword){
-    let sql = `select * from custom_evaluation_table where title like '%${keyword}%' or auth like '%${keyword}%' or printer like '%${keyword}%'`
+    let sql = `select * from books_table where title like '%${keyword}%' or auth like '%${keyword}%' or printer like '%${keyword}%'`
     return this.connect(sql)
   }
 
@@ -116,7 +116,7 @@ class Db {
 
 /*
 let myDb = Db.getInstance()
-let sql = `select * from custom_evaluation_table`
+let sql = `select * from books_table`
 myDb.find(sql).then((data) => {
  console.log(data)
 })

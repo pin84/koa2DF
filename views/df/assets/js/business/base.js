@@ -1,7 +1,8 @@
 let pageUl = document.querySelector('.pagination ul')
+
 let booksCon = document.getElementById('books')
 
-//页面刷新时查询数据库的开始索引 
+//页面刷新时查询数据库的开始索引
 let startPage = 1
 let pageOfItem = 3
 
@@ -18,14 +19,16 @@ function selectFavor() {
 
   //==01开始==拿到当前的页码数，并和li.index 合并一起做为books对象key,用户翻页后选中的书信息也能存到一个对象中
   let pageLiNodeList = document.querySelectorAll('.pagination ul li')
+  // let pageLiNodeList = pageUl.querySelectorAll('li')
   let currentPage
+  console.log(pageLiNodeList)
   pageLiNodeList.forEach(function (li) {
     if (li.className === 'current') {
       currentPage = li.innerText.replace(/[\r\n]/g, '')
     }
   })
   //==01结束==
-
+console.log('sssssssss',currentPage)
   arrLis.map(function (li, index) {
     li.flag = true
     li.index = index
@@ -141,7 +144,7 @@ function searchBook() {
         let inHtml = generateBookList(searchBooks)
 
         // let pageCount = Math.ceil(searchBooks[0].isum / pageOfItem)
-        let pageLi = generatePage(1) //搜索结果合成一页显示 
+        let pageLi = generatePage(1) //搜索结果合成一页显示
         booksCon.innerHTML = inHtml
         pageUl.appendChild(pageLi)
 
@@ -155,7 +158,7 @@ function searchBook() {
 }
 
 
-//获取页数总数 并添加到页面上
+//获取页数总数 并添加到页面上。成功后执行 selectFavor()
 function initPageNum(url) {
   ajax({
     method: 'get',
@@ -165,6 +168,7 @@ function initPageNum(url) {
       let liFragment = generatePage(pageCount)
       pageUl.appendChild(liFragment)
       pageClick(pageUl)
+      selectFavor()
     },
     error: function (err) {
       console.log(err)
@@ -206,16 +210,16 @@ function getData(index, pageOfItem, url, kw) {
   ajax({
     method: 'post',
     url: url,
+
     data: {
       index: index,
       page: pageOfItem,
       keyword: kw
     },
     success: function (data) {
-      let postData = JSON.parse(data)
-      let inHTML = generateBookList(postData)
+      let arrBooks = JSON.parse(data)
+      let inHTML = generateBookList(arrBooks)
       booksCon.innerHTML = inHTML
-      selectFavor()
     }
   })
 }
@@ -353,7 +357,7 @@ function siblings(elem) {
     }
     previ = previ.previousSibling
   }
-  nodes.reverse()//把顺序反转一下 这样元素的顺序就是按先后的了 
+  nodes.reverse()//把顺序反转一下 这样元素的顺序就是按先后的了
 
   let nexts = elem.nextSibling
   while (nexts) {
