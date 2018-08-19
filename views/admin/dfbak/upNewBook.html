@@ -40,12 +40,13 @@
 	<div>
 
 		{{include './components/top.html'}}
-		
+
 		<div>
 			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
 				书名: <input type="text" name="title"><br>
-				作者: <textarea name="description"></textarea><br>
-				封面: <input type="file" name="fl"><br>
+				作者: <input type='text' name="auth"></input><br>
+				印刷厂: <input type="text" name="printer"><br>
+				封面: <input type="file" name="file"><br>
 				<input type="submit" value="submit">
 			</form>
 		</div>
@@ -56,6 +57,7 @@
 					<th>ID</th>
 					<th>书名</th>
 					<th>作者</th>
+					<th>印刷厂</th>
 					<th>封面</th>
 					<th>操作</th>
 				</tr>
@@ -66,15 +68,16 @@
 					<td>{{books[$index].ID}}</td>
 					<td>{{books[$index].title}}</td>
 					<td>{{books[$index].auth}}</td>
-					<td style='word-break:break-all;'><img width='40' src="/upload/{{books[$index].src}}"></td>
+					<td>{{books[$index].printer}}</td>
+					<td style='word-break:break-all;'><img width='40' src="/uploads/{{books[$index].src}}"></td>
 					<td style='word-break:keep-all;'>
 						<a href="?act=mod&id={{books[$index].ID}}">修改</a>
 						<a href="?act=del&id={{books[$index].ID}}" onclick='return confirm("确认删除吗")' >删除</a>
 					</td>
 				</tr>
 				{{/each}}
-			</tbody> 
-		</table> 
+			</tbody>
+		</table>
 
 
 			{{if (typeof mod_data !== 'undefined')}}
@@ -90,7 +93,7 @@
 				</form>
 			</div>
 		{{/if}}
-		
+
 	</div>
 </body>
 </html>

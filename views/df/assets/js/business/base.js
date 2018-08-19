@@ -21,14 +21,12 @@ function selectFavor() {
   let pageLiNodeList = document.querySelectorAll('.pagination ul li')
   // let pageLiNodeList = pageUl.querySelectorAll('li')
   let currentPage
-  console.log(pageLiNodeList)
   pageLiNodeList.forEach(function (li) {
     if (li.className === 'current') {
       currentPage = li.innerText.replace(/[\r\n]/g, '')
     }
   })
   //==01结束==
-console.log('sssssssss',currentPage)
   arrLis.map(function (li, index) {
     li.flag = true
     li.index = index
@@ -233,7 +231,7 @@ function generateBookList(postData) {
       `
           <li class='item'>
           <div class="imgbox">
-            <img src="../../upload/${postData[i].src}">
+            <img src="../../uploads/${postData[i].src}">
           </div>
           <div class="detail">
             <h3>书名:${postData[i].title}</h3>
