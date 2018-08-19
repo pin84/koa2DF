@@ -79,17 +79,17 @@
 			</tbody>
 		</table>
 
-
-			{{if (typeof mod_data !== 'undefined')}}
+    {{if (typeof mod_data !== 'undefined')}}
 			<div class="cover"></div>
 			<div class='updateBox'>
 				<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
-					<input type="hidden" name="mod_id" value='<%= mod_data.ID %>'>
-					书名: <input type="text" name="title" value="<%= mod_data.title %>"><br>
-					作者: <textarea name="description"><%= mod_data.auth %></textarea><br>
-					封面: <input type="file" name="fl" ><br>
+					<input type="hidden" name="mod_id" value='{{mod_data.ID}}'>
+					书名: <input type="text" name="title" value="{{mod_data.title}}"><br>
+					作者: <input type='text' name="auth" value="{{mod_data.auth}}"><br>
+					印刷厂: <input type="text" name="printer" value="{{mod_data.printer}}"><br>
+					封面: <input type="file" name="file" ><br>
 					<input type="submit" value="modify">
-					<a href="/admin/custom" style='font-size:18px;'>cancle</a>
+					<a href="/admin/dfbak/upNewBook" style='font-size:18px;'>cancle</a>
 				</form>
 			</div>
 		{{/if}}

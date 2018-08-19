@@ -25,10 +25,13 @@ router.get('/', async (ctx) => {
 
   switch (ctx.query.act) {
     case 'mod':
+      let modrows = await myDB.find('books_table', ctx.query.id)
+      let modbooks = await myDB.findBooks()
+      await ctx.render('admin/dfbak/upNewbook', { books: modbooks, mod_data: modrows[0] })
       break
     case 'del':
-      let rows = await myDB.find('books_table', ctx.query.id)
-      fs.unlink('views/df/uploads/' + rows[0].src)
+      let delrows = await myDB.find('books_table', ctx.query.id)
+      fs.unlink('views/df/uploads/' + delrows[0].src)
       myDB.delete('books_table', ctx.query.id)
       await await ctx.redirect('upNewBook')
       break
@@ -41,11 +44,20 @@ router.get('/', async (ctx) => {
 })
 
 router.post('/', upload.single('file'), async (ctx) => {
-  let src = ctx.req.file.filename,
-    title = ctx.req.body.title,
+
+  let title = ctx.req.body.title,
     auth = ctx.req.body.auth,
     printer = ctx.req.body.printer
 
+  if (ctx.req.body.mod_id) {
+    myDB.
+
+    console.log('ssssss')
+
+
+    return
+  }
+  let src = ctx.req.file.filename
   myDB.updataNewBooks(title, auth, src, printer)
   let books = await myDB.findBooks()
 

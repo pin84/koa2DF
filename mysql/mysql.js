@@ -110,6 +110,8 @@ class Db {
     this.connect(sql)
   }
 
+  
+
   find(table, id) {
     let sql = `select * from ${table} where id='${id}'`
     return this.connect(sql)
