@@ -1,24 +1,6 @@
 let router = require('koa-router')()
-let multer = require('koa-multer')
 let fs = require('fs')
 let myDB = require('../../../mysql/mysql')
-
-
-//配置
-let storage = multer.diskStorage({
-  //文件保存路径
-  destination: (req, rile, cb) => {
-    cb(null, './views/df/uploads')
-  },
-
-  //修改文件名
-  filename: (req, file, cb) => {
-    let fileFormat = (file.originalname).split('.')
-    cb(null, Date.now() + '.' + fileFormat[fileFormat.length - 1])
-  }
-})
-
-let upload = multer({ storage: storage })
 
 
 router.get('/', async (ctx) => {
@@ -32,8 +14,8 @@ router.get('/', async (ctx) => {
     case 'del':
       let delrows = await myDB.find('books_table', ctx.query.id)
       fs.unlink('views/df/uploads/' + delrows[0].src)
-      myDB.delete('books_table', ctx.query.id)
-      await await ctx.redirect('upNewBook')
+      await myDB.delete('books_table', ctx.query.id)
+      await ctx.redirect('upNewBook')
       break
     default:
       let books = await myDB.findBooks()
@@ -43,24 +25,27 @@ router.get('/', async (ctx) => {
 
 })
 
-router.post('/', upload.single('file'), async (ctx) => {
+router.post('/', async (ctx) => {
 
-  let title = ctx.req.body.title,
-    auth = ctx.req.body.auth,
-    printer = ctx.req.body.printer
+  let title =ctx.request.body.title,
+    auth = ctx.request.body.auth,
+    printer = ctx.request.body.printer
 
-  if (ctx.req.body.mod_id) {
-    myDB.
-
-    console.log('ssssss')
-
-
-    return
-  }
-  let src = ctx.req.file.filename
-  myDB.updataNewBooks(title, auth, src, printer)
   let books = await myDB.findBooks()
 
+  //koaBody =======start=====
+  const file = ctx.request.files.file // 获取上传文件
+  const reader = fs.createReadStream(file.path); // 创建可读流
+  const ext = file.name.split('.').pop(); // 获取上传文件扩展名
+  let filename = `${Date.now()}.${ext}`
+  const upStream = fs.createWriteStream(`views/df/uploads/${filename}`); // 创建可写流
+  reader.pipe(upStream); // 可读流通过管道写入可写流
+  // ==========end========
+
+
+  
+
+  myDB.insertNewBooks(title, auth, filename, printer)
   await ctx.redirect('upNewBook', { books })
 })
 

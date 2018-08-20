@@ -8,6 +8,8 @@ const logger = require('koa-logger')
 const path = require('path')
 const render = require('koa-art-template')
 const router = require('koa-router')()
+const koaBody =require('koa-body')
+
 
 // const index = require('./routes/index')
 // const users = require('./routes/users')
@@ -34,6 +36,14 @@ render(app, {
   extname: '.html',
   debug: process.env.NODE_ENV !== 'production'
 });
+
+//koa-body
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
+  }
+}))
 
 
 

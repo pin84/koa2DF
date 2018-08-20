@@ -105,11 +105,19 @@ class Db {
     let sql = `select * from books_table`
     return this.connect(sql)
   }
-  updataNewBooks(title, auth, src, printer) {
+  insertNewBooks(title, auth, src, printer) {
     let sql = `insert into books_table (title,auth,src,printer) values ('${title}','${auth}','${src}','${printer}')`
     this.connect(sql)
   }
 
+  updataBookHaveAvartor(title,auth,printer,mod_src,id){
+    let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}',src='${mod_src}' where ID='${id}'`
+    this.connect(sql)
+  }
+  updataBookNoAvartor(title,auth,printer,id){
+    let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}' where ID='${id}'`
+    this.connect(sql)
+  }
   
 
   find(table, id) {
