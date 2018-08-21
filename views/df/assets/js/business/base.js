@@ -204,6 +204,7 @@ function pageClick(elem) {
 
 //获取数据
 function getData(index, pageOfItem, url, kw) {
+  console.log('getData')
   index = (index - 1) * pageOfItem
   ajax({
     method: 'post',

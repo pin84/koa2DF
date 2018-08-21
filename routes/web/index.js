@@ -13,8 +13,11 @@ router.get('getPageNum', async (ctx) => {
 })
 
 router.post('getBooks', async (ctx) => {
+
   let start = ctx.request.body.index,
     end = ctx.request.body.page
+
+    console.log(start,end)
   ctx.body = await myDB.getBooks(start, end)
 })
 
