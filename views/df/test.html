@@ -12,8 +12,9 @@
 
   <h1>test</h1>
 
+  <script src="./assets/js/git/myAjax.js"></script>
   <script>
-
+    /*
     let time = new Date()
     option = {
       year: 'numeric', month: '2-digit', day: 'numeric',
@@ -22,6 +23,26 @@
       timeZone: 'America/Los_Angeles'
     }
     console.log(new Intl.DateTimeFormat('zh-Hans-CN',option).format(time))
+*/
+
+    fn()
+    function fn(){
+      ajax({
+        method:'post',
+        url:'/postbooks',
+        data:{
+          start:0,
+          end:3
+        },
+        success:function(data){
+          console.log(data);
+        }
+      })
+    }
+
+
+
+
 
   </script>
 </body>

@@ -57,7 +57,7 @@ app.use(async (ctx, next) => {
 
 // routes
 router.use('/admin',admin.routes())
-router.use('/api',api.routes())
+// router.use('/api',api.routes())
 router.use('/',web.routes())
 
 

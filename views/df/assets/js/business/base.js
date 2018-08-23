@@ -6,11 +6,95 @@ let booksCon = document.getElementById('books')
 let startPage = 1
 let pageOfItem = 3
 
-initPageNum('/getPageNum')
-getData(startPage, pageOfItem, '/getBooks')
-searchBook()
-submitInfo()
+// initPageNum('/getPageNum')
+getData()
+// searchBook()
+// submitInfo()
 
+//获取数据
+function getData() {
+  console.log('postbooks')
+  // start = (start - 1) * end
+  let a = 0
+  let xhr = new XMLHttpRequest()
+  xhr.open('POST', '/findAllBooks', true)
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText)
+        let arrBooks = JSON.parse(xhr.responseText)
+        let inHTML = generateBookList(arrBooks)
+        booksCon.innerHTML = inHTML
+        // initPageNum('/getPageNum')
+      }
+    }
+  }
+  // xhr.responseType = 'text'
+  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+  // xhr.setRequestHeader("content-type","application/json; charset=utf-8")
+  xhr.send("start="+a)
+  console.log('end')
+}
+
+//获取页数总数 并添加到页面上。成功后执行 selectFavor()
+function initPageNum(url) {
+  ajax({
+    method: 'get',
+    url: url,
+    success: function (data) {
+      let pageCount = Math.ceil(JSON.parse(data)[0].count / pageOfItem)
+      let liFragment = generatePage(pageCount)
+      pageUl.appendChild(liFragment)
+      pageClick(pageUl)
+      selectFavor()
+    },
+    error: function (err) {
+      console.log(err)
+    }
+  })
+}
+
+
+//生成书列表
+function generateBookList(postData) {
+  let str = ''
+  for (let i = 0; i < postData.length; i++) {
+    str +=
+      `
+          <li class='item'>
+          <div class="imgbox">
+            <img src="../../uploads/${postData[i].src}">
+          </div>
+          <div class="detail">
+            <h3>书名:${postData[i].title}</h3>
+            <div class="auth">作者:${postData[i].auth}</div>
+            <div class="price">出版社:${postData[i].printer}</div>
+          </div>
+          <div class="favor" title='想要了解本书的更多信息，请选中后点击"请联系我"，我们会在24小内和您联系'>
+            <span>意向/取消</span>
+          </div>
+        </li>
+      `
+  }
+  return str
+}
+
+
+//生成成码
+function generatePage(pageCount) {
+  let fragment = document.createDocumentFragment()
+  for (let i = 0; i < pageCount; i++) {
+    let li = document.createElement('li')
+    let a = document.createElement('a')
+    a.innerText = i + 1
+    a.href = 'javascript:;'
+    li.appendChild(a)
+    fragment.appendChild(li)
+  }
+  fragment.children[0].className = 'current'
+  return fragment
+}
+/*
 //用户意向框
 let books = {}
 function selectFavor() {
@@ -156,38 +240,9 @@ function searchBook() {
 }
 
 
-//获取页数总数 并添加到页面上。成功后执行 selectFavor()
-function initPageNum(url) {
-  ajax({
-    method: 'get',
-    url: url,
-    success: function (data) {
-      let pageCount = Math.ceil(JSON.parse(data)[0].count / pageOfItem)
-      let liFragment = generatePage(pageCount)
-      pageUl.appendChild(liFragment)
-      pageClick(pageUl)
-      selectFavor()
-    },
-    error: function (err) {
-      console.log(err)
-    }
-  })
-}
 
-//生成成码
-function generatePage(pageCount) {
-  let fragment = document.createDocumentFragment()
-  for (let i = 0; i < pageCount; i++) {
-    let li = document.createElement('li')
-    let a = document.createElement('a')
-    a.innerText = i + 1
-    a.href = 'javascript:;'
-    li.appendChild(a)
-    fragment.appendChild(li)
-  }
-  fragment.children[0].className = 'current'
-  return fragment
-}
+
+
 
 
 //页码的点击事件
@@ -202,51 +257,12 @@ function pageClick(elem) {
   })
 }
 
-//获取数据
-function getData(index, pageOfItem, url, kw) {
-  index = (index - 1) * pageOfItem
-  ajax({
-    method: 'post',
-    url: url,
-
-    data: {
-      index: index,
-      page: pageOfItem,
-      keyword: kw
-    },
-    success: function (data) {
-      let arrBooks = JSON.parse(data)
-      let inHTML = generateBookList(arrBooks)
-      booksCon.innerHTML = inHTML
-    }
-  })
-}
 
 
-//生成书列表
-function generateBookList(postData) {
-  let str = ''
-  for (let i = 0; i < postData.length; i++) {
-    str +=
-      `
-          <li class='item'>
-          <div class="imgbox">
-            <img src="../../uploads/${postData[i].src}">
-          </div>
-          <div class="detail">
-            <h3>书名:${postData[i].title}</h3>
-            <div class="auth">作者:${postData[i].auth}</div>
-            <div class="price">出版社:${postData[i].printer}</div>
-          </div>
-          <div class="favor" title='想要了解本书的更多信息，请选中后点击"请联系我"，我们会在24小内和您联系'>
-            <span>意向/取消</span>
-          </div>
-        </li>
-      `
-  }
-  return str
-}
 
+
+
+*/
 
 
 //页码数外理
@@ -267,7 +283,7 @@ function handlerPage(target) {
     item.children[0].innerHTML = Number.parseInt(item.children[0].innerHTML) + step
   })
 }
-*/
+
 
 //原生的方法拿到兄弟元素，并把className 去掉
 function siblingsRemoveClass(elem) {
@@ -287,6 +303,8 @@ function siblingsRemoveClass(elem) {
     nexts = nexts.nextSibling
   }
 }
+
+*/
 
 //选择页码(暂时不用)
 /*

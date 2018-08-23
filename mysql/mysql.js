@@ -2,7 +2,7 @@ let mysql = require('mysql')
 const config = require('../config/config')
 
 let pool = mysql.createPool({
-  connectionLimit: 10,
+  connectionLimit: 100,
   host: config.database.HOST,
   user: config.database.USERNAME,
   password: config.database.PASSWORD,
@@ -54,10 +54,16 @@ class Db {
     return this.connect(sql)
   }
 
-  getBooks(start, end) {
-    let sql = `select * from books_table limit ${start}, ${end}`
-    return this.connect(sql)
+
+  getBooks() {
+    console.log('============getbooks    mysql=======')
+    // let sql = `select * from books_table limit ${start}, ${end}`
+    let sql = `select * from books_table limit 0,3`
+    let result = this.connect(sql)
+    console.log('==mysql == ', result)
+    return result
   }
+
 
   searchBooks(keyword) {
     let sql = `select * from books_table where title like '%${keyword}%' or auth like '%${keyword}%' or printer like '%${keyword}%'`
@@ -105,20 +111,21 @@ class Db {
     let sql = `select * from books_table`
     return this.connect(sql)
   }
+
   insertNewBooks(title, auth, src, printer) {
     let sql = `insert into books_table (title,auth,src,printer) values ('${title}','${auth}','${src}','${printer}')`
-    this.connect(sql)
+    return this.connect(sql)
   }
 
-  updataBookHaveAvartor(title,auth,printer,mod_src,id){
+  updataBookHaveAvartor(title, auth, printer, mod_src, id) {
     let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}',src='${mod_src}' where ID='${id}'`
-    this.connect(sql)
+    return this.connect(sql)
   }
-  updataBookNoAvartor(title,auth,printer,id){
+  updataBookNoAvartor(title, auth, printer, id) {
     let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}' where ID='${id}'`
-    this.connect(sql)
+    return this.connect(sql)
   }
-  
+
 
   find(table, id) {
     let sql = `select * from ${table} where id='${id}'`
@@ -126,7 +133,7 @@ class Db {
   }
   delete(table, id) {
     let sql = `delete from ${table} where id='${id}'`
-    this.connect(sql)
+    return this.connect(sql)
   }
   updata() {
 
@@ -134,14 +141,10 @@ class Db {
   insert() {
 
   }
+
+
 }
 
-/*
-let myDb = Db.getInstance()
-let sql = `select * from books_table`
-myDb.find(sql).then((data) => {
- console.log(data)
-})
-*/
+
 
 module.exports = Db.getInstance()
