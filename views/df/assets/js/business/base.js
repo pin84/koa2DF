@@ -11,6 +11,28 @@ getData(startPage, pageOfItem, '/getBooks')
 searchBook()
 submitInfo()
 
+
+//获取数据
+function getData(index, pageOfItem, url, kw) {
+  console.log('getData')
+  index = (index - 1) * pageOfItem
+  ajax({
+    method: 'post',
+    url: url,
+    data: {
+      index: index,
+      page: pageOfItem,
+      keyword: kw
+    },
+    success: function (data) {
+      let arrBooks = JSON.parse(data)
+      let inHTML = generateBookList(arrBooks)
+      booksCon.innerHTML = inHTML
+    }
+  })
+}
+
+
 //用户意向框
 let books = {}
 function selectFavor() {
@@ -202,26 +224,6 @@ function pageClick(elem) {
   })
 }
 
-//获取数据
-function getData(index, pageOfItem, url, kw) {
-  console.log('getData')
-  index = (index - 1) * pageOfItem
-  ajax({
-    method: 'post',
-    url: url,
-
-    data: {
-      index: index,
-      page: pageOfItem,
-      keyword: kw
-    },
-    success: function (data) {
-      let arrBooks = JSON.parse(data)
-      let inHTML = generateBookList(arrBooks)
-      booksCon.innerHTML = inHTML
-    }
-  })
-}
 
 
 //生成书列表

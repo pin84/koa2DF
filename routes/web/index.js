@@ -13,6 +13,7 @@ router.get('getPageNum', async (ctx) => {
 })
 
 router.post('getBooks', async (ctx) => {
+  console.log('getbooks')
 
   let start = ctx.request.body.index,
     end = ctx.request.body.page
