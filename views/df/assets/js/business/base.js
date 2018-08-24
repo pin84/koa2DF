@@ -3,37 +3,33 @@ let pageUl = document.querySelector('.pagination ul')
 let booksCon = document.getElementById('books')
 
 //页面刷新时查询数据库的开始索引
-let startPage = 1
+let start = 0
 let pageOfItem = 3
 
-// initPageNum('/getPageNum')
-getData()
-// searchBook()
-// submitInfo()
+initPageNum('/getPageNum')
+getData(start, pageOfItem, '/getBooks')
+searchBook()
+submitInfo()
 
 //获取数据
-function getData() {
-  console.log('postbooks')
-  // start = (start - 1) * end
-  let a = 0
-  let xhr = new XMLHttpRequest()
-  xhr.open('POST', '/findAllBooks', true)
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        console.log(xhr.responseText)
-        let arrBooks = JSON.parse(xhr.responseText)
-        let inHTML = generateBookList(arrBooks)
-        booksCon.innerHTML = inHTML
-        // initPageNum('/getPageNum')
-      }
+function getData(start, end, url) {
+
+  ajax({
+    method: 'POST',
+    url: url,
+    data: {
+      start: start,
+      end: end
+    },
+    success: function (data) {
+      let arrBooks = JSON.parse(data)
+      let inHTML = generateBookList(arrBooks)
+      booksCon.innerHTML = inHTML
+    },
+    error: function (err) {
+      console.log(err);
     }
-  }
-  // xhr.responseType = 'text'
-  xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
-  // xhr.setRequestHeader("content-type","application/json; charset=utf-8")
-  xhr.send("start="+a)
-  console.log('end')
+  })
 }
 
 //获取页数总数 并添加到页面上。成功后执行 selectFavor()
@@ -94,7 +90,7 @@ function generatePage(pageCount) {
   fragment.children[0].className = 'current'
   return fragment
 }
-/*
+
 //用户意向框
 let books = {}
 function selectFavor() {
@@ -239,12 +235,6 @@ function searchBook() {
   return false
 }
 
-
-
-
-
-
-
 //页码的点击事件
 function pageClick(elem) {
   elem.addEventListener('click', function (e) {
@@ -257,37 +247,9 @@ function pageClick(elem) {
   })
 }
 
-
-
-
-
-
-*/
-
-
-//页码数外理
-/*
-function handlerPage(target) {
-  // let arrLi = Array.prototype.slice.call(oLi)
-  let numInnerHTML = Number.parseInt(target.children[0].innerHTML)
-
-  //步数
-  let step = target.index + 1 - 5
-
-  //如果点击的元素内的页数小于5，则算出元素和1的差值 ，并赋给step
-  if (numInnerHTML < 5) {
-    step = 1 - Number.parseInt(arrLi[0].children[0].innerHTML)
-  }
-
-  arrLi.map((item) => {
-    item.children[0].innerHTML = Number.parseInt(item.children[0].innerHTML) + step
-  })
-}
-
-
 //原生的方法拿到兄弟元素，并把className 去掉
 function siblingsRemoveClass(elem) {
-  let previ = elem.previousSibling //返回当前节点的前一个兄弟节点,没有则返回null.
+  let previ = elem.previousSibling;//返回当前节点的前一个兄弟节点,没有则返回null.
   while (previ) {
     if (previ.nodeType === 1) {
       previ.className = ''
@@ -303,87 +265,3 @@ function siblingsRemoveClass(elem) {
     nexts = nexts.nextSibling
   }
 }
-
-*/
-
-//选择页码(暂时不用)
-/*
-function selectPage() {
-  mySelect.addEventListener('change', function(){
-    let index = mySelect.selectedIndex
-    let currentPage = mySelect.options[index].text
-    arrLi.map(function(item, index){
-      item.children[0].innerHTML = currentPage
-      currentPage++
-      arrLi[index].classList.remove('current')
-    })
-    arrLi[0].classList.add('current')
-  })
-}
-*/
-
-//填充select内的页码数
-/*
-function addPages() {
-  for (let i = 1, len = 30; i < len; i++) {
-    document.all.select.options[i] = new Option(i + 1)
-  }
-}
-*/
-
-//页码的点击事件
-/*
-function handleClick() {
-  ul.addEventListener('click', function(e){
-    e = e || event
-    if (e.target.tagName.toUpperCase() !== 'A' || e.target.innerHTML === '...') {
-      return
-    }
-    let index = 0
-    // 由于ie11不支classList 所以修改下面的代码
-    oLi.forEach(function(li){
-      li.index = index
-      index++
-      li.classList.remove('current');
-    })
-
-    if (Number.parseInt(e.target.innerHTML) > 5) {
-      arrLi[4].classList.add('current')
-    } else {
-      arrLi[e.target.parentNode.index].classList.add('current')
-    }
-
-    handlerPage(e.target.parentNode)
-
-    console.log(e.target.innerHTML)
-    getData(e.target.innerHTML, pageOfItem, '/get_books')
-  })
-}
-*/
-
-
-//原生实现jq的 siblings 方法  返回 elem 元素的兄弟元素
-/*
-function siblings(elem) {
-  let nodes = []
-  let previ = elem.previousSibling //返回当前节点的前一个兄弟节点,没有则返回null.
-  while (previ) {
-    if (previ.nodeType === 1) {
-      nodes.push(previ)
-    }
-    previ = previ.previousSibling
-  }
-  nodes.reverse()//把顺序反转一下 这样元素的顺序就是按先后的了
-
-  let nexts = elem.nextSibling
-  while (nexts) {
-    if (nexts.nodeType === 1) {
-      nodes.push(nexts)
-    }
-    nexts = nexts.nextSibling
-  }
-  return nodes
-}
-*/
-
-

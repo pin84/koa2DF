@@ -13,13 +13,12 @@ router.get('getPageNum', async (ctx) => {
   ctx.body = await myDB.getPageNum()
 })
 
-router.post('findAllBooks', async (ctx)=>{
-
-	// let start = ctx.request.body.start
-	// end = ctx
-	console.log('router.index -==========')
-	// ctx.body = await  myDB.getBooks()
-	ctx.body = 'afsdfsfsdfs'
+router.post('getBooks', async (ctx)=>{
+	let aa = ctx.request.body.start
+	bb = ctx.request.body.end
+	
+	console.log('router.index -==========',aa,bb)
+	ctx.body = await  myDB.getBooks()
 })
 
 router.post('searchBook', async (ctx) => {
