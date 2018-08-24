@@ -30,10 +30,10 @@ router.post('/', async (ctx) => {
   }
 
   if (ctx.request.body.mod_id) {
-    let id = ctx.request.body.mod_id,
-      title = ctx.request.body.title,
-      href = ctx.request.body.href,
-      description = ctx.request.body.description
+    let id = ctx.request.body.mod_id
+      // title = ctx.request.body.title,
+      // href = ctx.request.body.href,
+      // description = ctx.request.body.description
     await myDB.updataBanner(id, title, href, description)
     await ctx.redirect('banner')
     return
