@@ -64,7 +64,7 @@
 			</thead>
 			<tbody>
 					{{each books}}
-				<tr>
+				<tr style="height:55px;">
 					<td>{{books[$index].ID}}</td>
 					<td>{{books[$index].title}}</td>
 					<td>{{books[$index].auth}}</td>
@@ -78,6 +78,7 @@
 				{{/each}}
 			</tbody>
 		</table>
+
 
     {{if (typeof mod_data !== 'undefined')}}
 			<div class="cover"></div>

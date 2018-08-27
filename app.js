@@ -2,13 +2,13 @@ const Koa = require('koa')
 const app = new Koa()
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+// const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 //自己的中间件
 const path = require('path')
 const render = require('koa-art-template')
 const router = require('koa-router')()
-// const koaBody =require('koa-body')
+const koaBody = require('koa-body')
 
 
 // const index = require('./routes/index')
@@ -22,11 +22,11 @@ const web = require('./routes/web')
 onerror(app)
 
 // middlewares
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes:['json', 'form', 'text']
+// }))
 app.use(json())
-// app.use(logger())
+app.use(logger())
 // app.use(require('koa-static')(__dirname + '/public'))
 //为项目单独配置的静态文件路径
 app.use(require('koa-static')(__dirname + '/views/df/'))
@@ -38,14 +38,12 @@ render(app, {
 });
 
 //koa-body
-// app.use(koaBody({
-//   multipart: true,
-//   formidable: {
-//     maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
-//   }
-// }))
-
-
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
+  }
+}))
 
 // logger
 app.use(async (ctx, next) => {

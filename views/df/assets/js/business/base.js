@@ -32,6 +32,39 @@ function getData(index, pageOfItem, url, kw) {
   })
 }
 
+//获取页数总数 并添加到页面上。成功后执行 selectFavor()
+function initPageNum(url) {
+  ajax({
+    method: 'get',
+    url: url,
+    success: function (data) {
+      let pageCount = Math.ceil(JSON.parse(data)[0].count / pageOfItem)
+      let liFragment = generatePage(pageCount)
+      pageUl.appendChild(liFragment)
+      pageClick(pageUl)
+      selectFavor()
+    },
+    error: function (err) {
+      console.log(err)
+    }
+  })
+}
+
+//生成成码
+function generatePage(pageCount) {
+  let fragment = document.createDocumentFragment()
+  for (let i = 0; i < pageCount; i++) {
+    let li = document.createElement('li')
+    let a = document.createElement('a')
+    a.innerText = i + 1
+    a.href = 'javascript:;'
+    li.appendChild(a)
+    fragment.appendChild(li)
+  }
+  fragment.children[0].className = 'current'
+  return fragment
+}
+
 
 //用户意向框
 let books = {}

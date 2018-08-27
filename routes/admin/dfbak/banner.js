@@ -2,6 +2,7 @@ const router = require('koa-router')()
 let myDB = require('../../../mysql/mysql')
 
 router.get('/', async (ctx) => {
+  console.time('start')
   let banners = await myDB.getBanners()
   switch (ctx.query.act) {
     case 'mod':
@@ -15,25 +16,27 @@ router.get('/', async (ctx) => {
     default:
       // let banners = await myDB.getBanners()
       await ctx.render('admin/dfbak/banner', { banners })
+      console.timeEnd('start')
       break
   }
 })
 
+
+
 router.post('/', async (ctx) => {
+
   let title = ctx.request.body.title,
     href = ctx.request.body.href,
     description = ctx.request.body.description
-
   if (!title || !href || !description) {
     ctx.body = '请输入完整的信息'
     return
   }
 
   if (ctx.request.body.mod_id) {
+    console.log('banner have id')
     let id = ctx.request.body.mod_id
-      // title = ctx.request.body.title,
-      // href = ctx.request.body.href,
-      // description = ctx.request.body.description
+
     await myDB.updataBanner(id, title, href, description)
     await ctx.redirect('banner')
     return

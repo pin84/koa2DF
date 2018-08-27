@@ -117,8 +117,8 @@ class Db {
     return this.connect(sql)
   }
 
-  updataBookHaveAvartor(title, auth, printer, mod_src, id) {
-    let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}',src='${mod_src}' where ID='${id}'`
+  updataBookHaveAvartor(title, auth, printer, filename, id) {
+    let sql = `update books_table set title='${title}',auth='${auth}',printer='${printer}',src='${filename}' where ID='${id}'`
     return this.connect(sql)
   }
   updataBookNoAvartor(title, auth, printer, id) {
