@@ -60,10 +60,8 @@ class Db {
     // let sql = `select * from books_table limit ${start}, ${end}`
     let sql = `select * from books_table limit 0,3`
     let result = this.connect(sql)
-    console.log('==mysql == ', result)
     return result
   }
-
 
   searchBooks(keyword) {
     let sql = `select * from books_table where title like '%${keyword}%' or auth like '%${keyword}%' or printer like '%${keyword}%'`
@@ -87,7 +85,7 @@ class Db {
 
   updataBanner(id, title, href, description) {
     let sql = `update banner_table set title='${title}',href='${href}',description='${description}' where ID='${id}'`
-    this.connect(sql)
+    return this.connect(sql)
   }
 
   insertBanner(title, description, href) {
@@ -97,7 +95,7 @@ class Db {
 
   deleteBanner(id) {
     let sql = `delete from banner_table where id='${id}'`
-    this.connect(sql)
+    return this.connect(sql)
   }
 
   //msg

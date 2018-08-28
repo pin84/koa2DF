@@ -14,13 +14,10 @@ router.get('getPageNum', async (ctx) => {
 })
 
 router.post('getBooks', async (ctx) => {
-  console.log('getbooks')
-
-  let start = ctx.request.body.index,
-    end = ctx.request.body.page
-
-    console.log(start,end)
-  ctx.body = await myDB.getBooks(start, end)
+	let start = ctx.request.body.start,
+	end = ctx.request.body.end;
+    console.log('router web index.js =====20',ctx.request.body,start,end)
+  ctx.body = await myDB.getBooks()
 })
 
 router.post('searchBook', async (ctx) => {
@@ -32,9 +29,12 @@ router.post('favor', async (ctx) => {
 	let username = ctx.request.body.name,
 	phone = ctx.request.body.phone,
 	books = ctx.request.body.books
+	console.log('======router index favor====',ctx.request.body)
+	
+	console.log('favor',username,phone,books)
 
-	ctx.body = await myDB.favor(username,phone,books)
-
+	// ctx.body = await myDB.favor(username,phone,books)
+	ctx.body = 'test'
 })
 
 

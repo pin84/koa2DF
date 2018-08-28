@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
@@ -12,37 +12,43 @@
 
   <h1>test</h1>
 
-  <script src="./assets/js/git/myAjax.js"></script>
+  <div>
+
+
+
+
+
+  </div>
+
+  <pre id="div"></pre>
   <script>
     /*
     let time = new Date()
     option = {
-      year: 'numeric', month: '2-digit', day: 'numeric',
-      hour: 'numeric', minute: 'numeric', second: 'numeric',
-      hour12: false, // 使用24小时制
+      year: 'numeric' month: '2-digit' day: 'numeric'
+      hour: 'numeric' minute: 'numeric' second: 'numeric'
+      hour12: false // 使用24小时制
       timeZone: 'America/Los_Angeles'
     }
-    console.log(new Intl.DateTimeFormat('zh-Hans-CN',option).format(time))
+    console.log(new Intl.DateTimeFormat('zh-Hans-CN'option).format(time))
 */
 
-    fn()
-    function fn(){
-      ajax({
-        method:'post',
-        url:'/postbooks',
-        data:{
-          start:0,
-          end:3
-        },
-        success:function(data){
-          console.log(data);
-        }
-      })
+   let arr = []
+   let frament = new DocumentFragment
+
+
+    for(let i = 0; i < 1500; i++){
+      let num = Math.random().toString(36).substr(2,5)
+      arr.push(num + "\r\n")
     }
 
 
+  let set = new Set(arr)
+  let newArr = Array.from(set)
 
-
+  let div = document.getElementById('div')
+  div.innerHTML = newArr 
+console.log(newArr);
 
   </script>
 </body>

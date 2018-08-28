@@ -9,21 +9,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "art-template": "^4.12.2",
+    "art-template": "^4.13.0",
     "debug": "^3.1.0",
-    "koa": "^2.2.0",
+    "koa": "^2.5.2",
     "koa-art-template": "^1.1.1",
     "koa-body": "^4.0.4",
     "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.0",
     "koa-multer": "^1.0.2",
-    "koa-onerror": "^4.0.0",
-    "koa-router": "^7.1.1",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "mysql": "^2.16.0"
-  },
-  "devDependencies": {
+    "mysql": "^2.16.0",
     "nodemon": "^1.18.3"
   }
 }

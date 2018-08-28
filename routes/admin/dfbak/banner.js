@@ -2,10 +2,9 @@ const router = require('koa-router')()
 let myDB = require('../../../mysql/mysql')
 
 router.get('/', async (ctx) => {
-  console.time('start')
-  let banners = await myDB.getBanners()
   switch (ctx.query.act) {
     case 'mod':
+      let banners = await myDB.getBanners()
       let findBanner = await myDB.findBannerFromID(ctx.query.id)
       await ctx.render('admin/dfbak/banner', { banners, mod_data: findBanner })
       break
@@ -14,9 +13,10 @@ router.get('/', async (ctx) => {
       await ctx.redirect('banner')
       break
     default:
-      // let banners = await myDB.getBanners()
-      await ctx.render('admin/dfbak/banner', { banners })
-      console.timeEnd('start')
+      console.log('default');
+      
+      let bannersa = await myDB.getBanners()
+      await ctx.render('admin/dfbak/banner', { banners:bannersa })
       break
   }
 })
@@ -28,6 +28,9 @@ router.post('/', async (ctx) => {
   let title = ctx.request.body.title,
     href = ctx.request.body.href,
     description = ctx.request.body.description
+
+    console.log('banner-post',title,href,description);
+    
   if (!title || !href || !description) {
     ctx.body = '请输入完整的信息'
     return
@@ -42,6 +45,7 @@ router.post('/', async (ctx) => {
     return
   }
 
+  console.log('===========conaaaaaaaaaaa')
   await myDB.insertBanner(title, description, href)
   await ctx.redirect('banner')
 })

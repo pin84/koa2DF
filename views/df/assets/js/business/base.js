@@ -13,23 +13,49 @@ submitInfo()
 
 
 //获取数据
-function getData(index, pageOfItem, url, kw) {
-  console.log('getData')
-  index = (index - 1) * pageOfItem
+function getData(start, end, url) {
+
+  console.log('getData',start,end,url)
+  // index = (index - 1) * pageOfItem
+
+  /*
+  let xhr = new XMLHttpRequest()
+  xhr.open('POST',url)
+  xhr.onreadystatechange = function(){
+    console.log(xhr.readyState);
+    
+    if(xhr.readyState === 4){
+      if(xhr.status === 200 ){
+        console.log(xhr.responseText)
+      }
+    }
+  }
+
+  xhr.setRequestHeader("Content-Type", "multipart/form-data;")
+  xhr.setRequestHeader("If-Modified-Since","0");//不缓存
+  xhr.send('start=0&end=3')
+  */
+  
   ajax({
     method: 'post',
     url: url,
+
     data: {
-      index: index,
-      page: pageOfItem,
-      keyword: kw
+      start:start,
+      end:end
     },
+
     success: function (data) {
       let arrBooks = JSON.parse(data)
+      // console.log('getdata  success',data);
+      
       let inHTML = generateBookList(arrBooks)
       booksCon.innerHTML = inHTML
+      selectFavor()
     }
   })
+
+  
 }
 
 //获取页数总数 并添加到页面上。成功后执行 selectFavor()
@@ -42,7 +68,6 @@ function initPageNum(url) {
       let liFragment = generatePage(pageCount)
       pageUl.appendChild(liFragment)
       pageClick(pageUl)
-      selectFavor()
     },
     error: function (err) {
       console.log(err)
@@ -69,12 +94,13 @@ function generatePage(pageCount) {
 //用户意向框
 let books = {}
 function selectFavor() {
+  console.log('selectFavor');
   let noteListLi = document.querySelectorAll('#books .item')
   let arrLis = Array.prototype.slice.call(noteListLi)
-
   //==01开始==拿到当前的页码数，并和li.index 合并一起做为books对象key,用户翻页后选中的书信息也能存到一个对象中
   let pageLiNodeList = document.querySelectorAll('.pagination ul li')
   // let pageLiNodeList = pageUl.querySelectorAll('li')
+  
   let currentPage
   pageLiNodeList.forEach(function (li) {
     if (li.className === 'current') {
@@ -82,9 +108,14 @@ function selectFavor() {
     }
   })
   //==01结束==
+
+  console.log(arrLis);
+  
   arrLis.map(function (li, index) {
     li.flag = true
     li.index = index
+    console.log(li);
+    
     li.addEventListener('click', function (e) {
       e = e || event
       if (e.target.innerText !== '意向/取消') {
@@ -122,15 +153,11 @@ function submitInfo() {
     inputPhone = document.querySelector('.info .phone')
   btnSubmit.addEventListener('click', function (e) {
     let noteListLi = document.querySelectorAll('#books .item')
-
     console.log(inputPhone.value.length > 5);
-
-
     if (!inputName.value || !inputPhone.value) {
       alert('请输入姓名及联系方式')
       return
     }
-
     if (inputPhone.value.length < 9) {
       alert('请输入正确的联系方式')
       return
@@ -140,6 +167,9 @@ function submitInfo() {
       return
     }
     let jsonBooks = JSON.stringify(books)
+
+
+    console.log(jsonBooks)
     ajax({
       method: 'post',
       url: '/favor',
