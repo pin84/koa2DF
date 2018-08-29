@@ -30,8 +30,6 @@ function getData(start, end, url) {
       selectFavor()
     }
   })
-
-  
 }
 
 //获取页数总数 并添加到页面上。成功后执行 selectFavor()
@@ -120,8 +118,6 @@ function selectFavor() {
         delete books[bookName] //不选中则移除
         li.flag = true
       }
-
-      console.log(books)
     })
 
     li.addEventListener('mouseenter',function(){
@@ -146,7 +142,6 @@ function submitInfo() {
     inputPhone = document.querySelector('.info .phone')
   btnSubmit.addEventListener('click', function (e) {
     let noteListLi = document.querySelectorAll('#books .item')
-    console.log(inputPhone.value.length > 5);
     if (!inputName.value || !inputPhone.value) {
       alert('请输入姓名及联系方式')
       return
@@ -160,9 +155,6 @@ function submitInfo() {
       return
     }
     let jsonBooks = JSON.stringify(books)
-
-
-    console.log(jsonBooks)
     ajax({
       method: 'post',
       url: '/favor',
@@ -272,6 +264,33 @@ function generateBookList(postData) {
   }
   return str
 }
+
+
+// 页务范围页面 左边小红色三角形的控制 
+let nodeListA = document.querySelectorAll('.list ul li a')
+let nodeListUse = document.querySelectorAll('.list ul li a use')
+nodeListUse[1].href.baseVal = '#icon-triangle-white'
+let arrA = Array.prototype.slice.call(nodeListA)
+let index = 0
+arrA.forEach(function(item){
+  item.index = index
+  index++
+  item.addEventListener('click',function(e){
+    e = e || event
+    //每个a标签的背景 (这个循环可以改进)
+    arrA.forEach(function(item){
+      item.className = ''
+    })
+    item.className = 'active'
+    
+    //小三角形
+    let arrUse = Array.prototype.slice.call(nodeListUse)
+    arrUse.forEach(function(use){
+      use.href.baseVal = '#icon-triangle-red'
+    })
+    nodeListUse[e.target.index].href.baseVal = '#icon-triangle-white'
+  })
+})
 
 
 
