@@ -4,7 +4,7 @@ let booksCon = document.getElementById('books')
 
 //页面刷新时查询数据库的开始索引
 let start = 0
-let pageOfItem = 12
+let pageOfItem = 3
 
 initPageNum('/getPageNum')
 getData(start, pageOfItem, '/getBooks')
