@@ -17,7 +17,7 @@ router.post('getBooks', async (ctx) => {
 	let start = ctx.request.body.start,
 	end = ctx.request.body.end;
     console.log('router web index.js =====20',ctx.request.body,start,end)
-  ctx.body = await myDB.getBooks()
+  ctx.body = await myDB.getBooks(start,end)
 })
 
 router.post('searchBook', async (ctx) => {
@@ -30,11 +30,8 @@ router.post('favor', async (ctx) => {
 	phone = ctx.request.body.phone,
 	books = ctx.request.body.books
 	console.log('======router index favor====',ctx.request.body)
-	
-	console.log('favor',username,phone,books)
 
-	// ctx.body = await myDB.favor(username,phone,books)
-	ctx.body = 'test'
+	ctx.body = await myDB.favor(username,phone,books)
 })
 
 

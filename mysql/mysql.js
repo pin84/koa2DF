@@ -55,10 +55,10 @@ class Db {
   }
 
 
-  getBooks() {
+  getBooks(start,end) {
     console.log('============getbooks    mysql=======')
-    // let sql = `select * from books_table limit ${start}, ${end}`
-    let sql = `select * from books_table limit 0,3`
+    let sql = `select * from books_table limit ${start}, ${end}`
+    // let sql = `select * from books_table limit 0,3`
     let result = this.connect(sql)
     return result
   }

@@ -4,7 +4,7 @@ let booksCon = document.getElementById('books')
 
 //页面刷新时查询数据库的开始索引
 let start = 0
-let pageOfItem = 3
+let pageOfItem = 12
 
 initPageNum('/getPageNum')
 getData(start, pageOfItem, '/getBooks')
@@ -14,41 +14,17 @@ submitInfo()
 
 //获取数据
 function getData(start, end, url) {
-
-  console.log('getData',start,end,url)
-  // index = (index - 1) * pageOfItem
-
-  /*
-  let xhr = new XMLHttpRequest()
-  xhr.open('POST',url)
-  xhr.onreadystatechange = function(){
-    console.log(xhr.readyState);
-    
-    if(xhr.readyState === 4){
-      if(xhr.status === 200 ){
-        console.log(xhr.responseText)
-      }
-    }
-  }
-
-  xhr.setRequestHeader("Content-Type", "multipart/form-data;")
-  xhr.setRequestHeader("If-Modified-Since","0");//不缓存
-  xhr.send('start=0&end=3')
-  */
-  
+  let startpage = start*end
   ajax({
     method: 'post',
     url: url,
-
     data: {
-      start:start,
+      start:startpage,
       end:end
     },
-
     success: function (data) {
       let arrBooks = JSON.parse(data)
       // console.log('getdata  success',data);
-      
       let inHTML = generateBookList(arrBooks)
       booksCon.innerHTML = inHTML
       selectFavor()
@@ -94,13 +70,13 @@ function generatePage(pageCount) {
 //用户意向框
 let books = {}
 function selectFavor() {
-  console.log('selectFavor');
   let noteListLi = document.querySelectorAll('#books .item')
   let arrLis = Array.prototype.slice.call(noteListLi)
   //==01开始==拿到当前的页码数，并和li.index 合并一起做为books对象key,用户翻页后选中的书信息也能存到一个对象中
   let pageLiNodeList = document.querySelectorAll('.pagination ul li')
   // let pageLiNodeList = pageUl.querySelectorAll('li')
   
+
   let currentPage
   pageLiNodeList.forEach(function (li) {
     if (li.className === 'current') {
@@ -108,14 +84,11 @@ function selectFavor() {
     }
   })
   //==01结束==
-
-  console.log(arrLis);
-  
   arrLis.map(function (li, index) {
     li.flag = true
     li.index = index
-    console.log(li);
-    
+    let divFavor  = li.querySelector('.favor')
+
     li.addEventListener('click', function (e) {
       e = e || event
       if (e.target.innerText !== '意向/取消') {
@@ -125,23 +98,43 @@ function selectFavor() {
       let bookName = (li.children[1].children[0].innerText).split(':')[1]
       let auth = (li.children[1].children[1].innerText).split(':')[1]
       let printer = (li.children[1].children[2].innerText).split(':')[1]
-
+      
       if (li.flag) {
-        li.style.border = '1px solid red'
+        // li.style.border = '1px solid red'
+        divFavor.style.opacity = '1'
 
         //选中则添加到books里
-        books[currentPage + li.index] = {
-          书名: bookName,
+        // books[currentPage + li.index] = {
+        //   书名: bookName,
+        //   作者: auth,
+        //   出版社: printer
+        // }
+
+        books[bookName] = {
           作者: auth,
           出版社: printer
         }
         li.flag = false
       } else {
-        li.style.border = '1px solid #fff'
-        delete books[currentPage + li.index] //不选中则移除
+        divFavor.style.opacity = '0'
+        delete books[bookName] //不选中则移除
         li.flag = true
       }
+
+      console.log(books)
     })
+
+    li.addEventListener('mouseenter',function(){
+      divFavor.style.opacity = '1'
+      
+    })
+    li.addEventListener('mouseleave',function(){
+      if(li.flag){
+        divFavor.style.opacity = '0'
+      }
+    })
+
+
   })
 }
 
@@ -183,9 +176,10 @@ function submitInfo() {
         inputName.value = ''
         inputPhone.value = ''
         noteListLi.forEach(function (li) {
+          let divFavor  = li.querySelector('.favor')
           if (!li.flag) {
             li.flag = !li.flag
-            li.style.border = '1px solid #fff'
+            divFavor.style.opacity = '0'
           }
         })
         alert('信息提交成功，我们会在24小时内联系您。')
@@ -197,6 +191,7 @@ function submitInfo() {
   btnCancle.addEventListener('click', function () {
     inputName.value = ''
     inputPhone.value = ''
+    
   })
   // return false
 }
@@ -248,7 +243,7 @@ function pageClick(elem) {
     e.target.parentNode.className = 'current'
     siblingsRemoveClass(e.target.parentNode)
     //获取相应的数据
-    getData(e.target.innerText, pageOfItem, '/getBooks')
+    getData(e.target.innerText-1, pageOfItem, '/getBooks')
   })
 }
 

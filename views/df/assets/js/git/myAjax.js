@@ -25,14 +25,9 @@ function ajax(opt) {
     params.push(key + '=' + opt.data[key]);
   }
   var postData = params.join('&');
-  console.log(postData)
   if (opt.method.toUpperCase() === 'POST') {
     xmlHttp.open(opt.method, opt.url, opt.async);
-   
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8;");
-    // xmlHttp.setRequestHeader("Content-type", "text/plain; charset=utf-8;");
-    // xmlHttp.setRequestHeader("Content-type", "text/html; charset=utf-8;");
-    
+    xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
     xmlHttp.send(postData);
   } else if (opt.method.toUpperCase() === 'GET') {
     xmlHttp.open(opt.method, opt.url + '?' + postData, opt.async);
