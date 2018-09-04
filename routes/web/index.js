@@ -4,9 +4,9 @@ let myDB = require('../../mysql/mysql')
 /**
  * 前台和后台路由的写法不一样， about 前面不用加 /
  */
-//  router.get('/', async (ctx) => {
-//  	await ctx.render('df/index')
-//  })
+ router.get('/', async (ctx) => {
+ 	await ctx.render('df/index')
+ })
 
 router.get('getPageNum', async (ctx) => {
 	console.log('index ============ 12 ============ getpagenum')

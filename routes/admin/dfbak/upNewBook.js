@@ -6,13 +6,9 @@ let myDB = require('../../../mysql/mysql')
 router.get('/', async (ctx) => {
   switch (ctx.query.act) {
     case 'mod':
-      // let modbooks =  myDB.findBooks()
-      // let modrows =  myDB.find('books_table', ctx.query.id)
-
-      let [modbooks,modrows] = await
-      Promise.all([ myDB.findBooks(),myDB.find('books_table', ctx.query.id)])
-
-      await ctx.render('admin/dfbak/upNewbook', { books: modbooks, mod_data: modrows[0] })
+      let modbooks = await myDB.findBooks()
+      let modrows = await myDB.find('books_table', ctx.query.id)
+      await ctx.render('admin/dfbak/upNewBook', { books: modbooks, mod_data: modrows})
       break
     case 'del':
       let delrows = await myDB.find('books_table', ctx.query.id)
@@ -25,14 +21,10 @@ router.get('/', async (ctx) => {
       await ctx.redirect('upNewBook')
       break
     default:
-    console.time('start')
       let books = await myDB.findBooks()
       await ctx.render('admin/dfbak/upNewBook', { books })
-      console.timeEnd('start')
       break
   }
-
-
 })
 
 router.post('/', async (ctx) => {

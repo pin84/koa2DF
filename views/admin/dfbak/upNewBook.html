@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,38 @@
 	<link rel="icon" href="data:image/ico;base64,aWNv">
 	<title>admin-banner</title>
 	<style type="text/css">
-		body{
-			margin-bottom:50px;
+		body {
+			margin-bottom: 50px;
 		}
-		.cover{
-			position:fixed;
-			width:100%;
-			height:100;
-			background:#000;
-			opacity:.3;
-			left:0;
-			top:0;
-			right:0;
-			bottom:0;
+
+		.cover {
+			position: fixed;
+			width: 100%;
+			height: 100;
+			background: #000;
+			opacity: .3;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
 		}
-		.updateBox{
-			box-sizing:border-box;
-			padding:10px;
-			width:300px;
-			height:200px;
-			border:1px solid #eee;
-			background:#fff;
-			position:fixed;
-			left:50%;
-			top:50%;
-			margin-top:-100px;
-			margin-left:-150px;
+
+		.updateBox {
+			box-sizing: border-box;
+			padding: 10px;
+			width: 300px;
+			height: 200px;
+			border: 1px solid #eee;
+			background: #fff;
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			margin-top: -100px;
+			margin-left: -150px;
 		}
 	</style>
 </head>
+
 <body>
 	<div>
 
@@ -43,15 +47,13 @@
 
 		<div>
 			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
-				书名: <input type="text" name="title"><br>
-				作者: <input type='text' name="auth"><br>
-				印刷厂: <input type="text" name="printer"><br>
-				封面: <input type="file" name="file"><br>
+				书名: <input type="text" name="title"><br> 作者: <input type='text' name="auth"><br> 印刷厂: <input type="text" name="printer"><br>				封面:
+				<input type="file" name="file"><br>
 				<input type="submit" value="submit">
 			</form>
 		</div>
 
-		<table border='1' style='width:95%;border-collapse:collapse;'>
+		<table style='width:95%;border-collapse:collapse;'>
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -63,7 +65,7 @@
 				</tr>
 			</thead>
 			<tbody>
-					{{each books}}
+				{{each books}}
 				<tr style="height:55px;">
 					<td>{{books[$index].ID}}</td>
 					<td>{{books[$index].title}}</td>
@@ -72,29 +74,28 @@
 					<td style='word-break:break-all;'><img width='40' src="/uploads/{{books[$index].src}}"></td>
 					<td style='word-break:keep-all;'>
 						<a href="?act=mod&id={{books[$index].ID}}">修改</a>
-						<a href="?act=del&id={{books[$index].ID}}" onclick='return confirm("确认删除吗")' >删除</a>
+						<a href="?act=del&id={{books[$index].ID}}" onclick='return confirm("确认删除吗")'>删除</a>
 					</td>
 				</tr>
 				{{/each}}
 			</tbody>
+
 		</table>
 
-
-    {{if (typeof mod_data !== 'undefined')}}
-			<div class="cover"></div>
-			<div class='updateBox'>
-				<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
-					<input type="hidden" name="mod_id" value='{{mod_data.ID}}'>
-					书名: <input type="text" name="title" value="{{mod_data.title}}"><br>
-					作者: <input type='text' name="auth" value="{{mod_data.auth}}"><br>
-					印刷厂: <input type="text" name="printer" value="{{mod_data.printer}}"><br>
-					封面: <input type="file" name="file" ><br>
-					<input type="submit" value="modify">
-					<a href="/admin/dfbak/upNewBook" style='font-size:18px;'>cancle</a>
-				</form>
-			</div>
+		{{if (typeof mod_data !== 'undefined')}}
+		<div class="cover"></div>
+		<div class='updateBox'>
+			<form action="?" method="post" autocomplete='off' enctype='multipart/form-data'>
+				<input type="hidden" name="mod_id" value='{{mod_data[0].ID}}'> 书名: <input type="text" name="title" value="{{mod_data[0].title}}"><br>				作者:
+				<input type='text' name="auth" value="{{mod_data[0].auth}}"><br> 印刷厂: <input type="text" name="printer" value="{{mod_data[0].printer}}"><br>				封面:
+				<input type="file" name="file"><br>
+				<input type="submit" value="modify">
+				<a href="/admin/dfbak/upNewBook" style='font-size:18px;'>cancle</a>
+			</form>
+		</div>
 		{{/if}}
 
 	</div>
 </body>
+
 </html>
