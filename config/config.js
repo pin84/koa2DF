@@ -1,6 +1,5 @@
 const config = {
   
-  port: 8080,
 
   database:{
     DATABASE:'blog',

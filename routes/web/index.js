@@ -35,30 +35,6 @@ router.post('favor', async (ctx) => {
 })
 
 
-//seller 手机app的接口
-let appData = require('../../public/data/appData.json')
-let seller = appData.seller;
-let goods = appData.goods;
-let ratings = appData.ratings;
 
-router.get('seller',async (ctx) => {
-  ctx.body = {
-    errno: 0,
-    seller: seller
-  }
-})
-router.get('goods',async (ctx) => {
-  ctx.body = {
-    errno: 0,
-    goods: goods
-  }
-})
-router.get('ratings',async (ctx) => {
-  ctx.body = {
-    errno: 0,
-    goods: ratings
-  }
-})
-//seller 手机app的接口 =====END==========
 
 module.exports = router
