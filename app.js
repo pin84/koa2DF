@@ -9,6 +9,7 @@ const path = require('path')
 const render = require('koa-art-template')
 const router = require('koa-router')()
 const koaBody = require('koa-body')
+const cors = require('koa2-cors') //跨域
 
 
 // const index = require('./routes/index')
@@ -27,6 +28,7 @@ onerror(app)
 // }))
 app.use(json())
 app.use(logger())
+app.use(cors())
 // app.use(require('koa-static')(__dirname + '/public'))
 //为项目单独配置的静态文件路径
 app.use(require('koa-static')(__dirname + '/views/df/'))
