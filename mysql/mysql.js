@@ -18,7 +18,6 @@ class Db {
   }
 
   constructor() {
-
   }
 
   connect(sql, values) {

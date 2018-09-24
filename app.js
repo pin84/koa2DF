@@ -10,11 +10,27 @@ const render = require('koa-art-template')
 const router = require('koa-router')()
 const koaBody = require('koa-body')
 const cors = require('koa2-cors') //跨域
+const session = require('koa-session')
 
 
-// const index = require('./routes/index')
-// const users = require('./routes/users')
+//session
+app.keys = ['some secret hurr'];
+const CONFIG = {
+  key: 'koa:sess',
+  maxAge: 20*60*1000,
+  autoCommit: true,
+  overwrite: true,
+  httpOnly: true,
+  signed: true,
+  rolling: false,
+  renew: true,
+};
+app.use(session(CONFIG, app));
 
+
+
+
+//路由
 const admin = require('./routes/admin')
 const api = require('./routes/admin/api')
 const web = require('./routes/web')
